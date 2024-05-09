@@ -137,23 +137,25 @@ const Signup = ({ closeSignup }: { closeSignup: any }) => {
                 setPasscordMatchingError("");
               }
             }}
-            className="border-b-2 border-gray-400 focus:border-black p-2 mb-4 w-full outline-none"
+            className="border-b-2 border-gray-400 focus:border-black p-2 mb-1 w-full outline-none"
           />
 
           <div
             style={{
               opacity: passcordMatchingError ? 1 : 0,
-              minHeight: "25px",
+              minHeight: "20px",
               color: "red",
+              font: ""
             }}>
             {passcordMatchingError}
           </div>
           <button
             type="submit"
-            className="bg-blue-500 w-full text-white p-2 mt-4 rounded">
+            className="bg-blue-500 w-full text-white p-2 mt-2 rounded">
             Signup
           </button>
         </form>
+        <p className="text-xs"><span className="text-gray-700">By creating an account, I accept the </span><a href="#">Terms & Conditions & Privacy Policy</a></p>
       </div>
     </div>
   );

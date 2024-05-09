@@ -1,5 +1,9 @@
 import jwt from "jsonwebtoken";
 import mongoose, {Schema} from "mongoose";
+<<<<<<< HEAD:server/src/models/roomParticipant.model.js
+=======
+import mongooseAggregatePaginate from "mongoose-aggregate-paginate-v2";
+>>>>>>> c5729ed2435870a4897bfb7bcc2737db5d7cbf71:src/models/roomParticipant.model.js
 
 const roomParticipantSchema = new Schema(
     {
@@ -17,7 +21,14 @@ const roomParticipantSchema = new Schema(
             type: mongoose.Types.ObjectId,
             ref: "User",
             required: true
+<<<<<<< HEAD:server/src/models/roomParticipant.model.js
         } 
+=======
+        },
+        token: {
+            type: String
+        }  
+>>>>>>> c5729ed2435870a4897bfb7bcc2737db5d7cbf71:src/models/roomParticipant.model.js
     },
     {
         timestamps: true
@@ -39,4 +50,8 @@ roomParticipantSchema.methods.generateToken = function(time){
     ) 
 } 
 
+<<<<<<< HEAD:server/src/models/roomParticipant.model.js
+=======
+roomParticipantSchema.plugin(mongooseAggregatePaginate);
+>>>>>>> c5729ed2435870a4897bfb7bcc2737db5d7cbf71:src/models/roomParticipant.model.js
 export const RoomParticipant = mongoose.model("RoomParticipant",roomParticipantSchema);

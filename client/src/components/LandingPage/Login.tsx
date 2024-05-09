@@ -22,7 +22,7 @@ const Login = ({ closeLogin }: { closeLogin: any }) => {
     const identifier = formData?.get("identifier");
     const password = formData?.get("password");
 
-    const isEmail = String(identifier)?.includes("@gmail.com");
+    const isEmail = /@gmail\.com$/.test(String(identifier));
     const data = isEmail
       ? { email: identifier, password }
       : { username: identifier, password };

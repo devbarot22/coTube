@@ -19,7 +19,14 @@ const roomSchema = new Schema(
             type: Number,            
             enum: [5, 10, 20, 40],
             default: 5           
+<<<<<<< HEAD:server/src/models/room.model.js
         }
+=======
+        },
+        token: {
+            type: String,
+        }        
+>>>>>>> c5729ed2435870a4897bfb7bcc2737db5d7cbf71:src/models/room.model.js
     },
     {
         timestamps: true
