@@ -34,6 +34,11 @@ export {default as ArrowForEmailGif} from './ArrowGif.gif'
 export {default as CancelIcon} from './cancelIcon.svg'
 export {default as ClosedEye} from './closed-eye-24.svg'
 export {default as OpenEye} from './opened-eye-48.svg'
+export {default as DarkEditorLogo} from './D.LogoE.png'
+export {default as DarkYoutuberLogo} from './D.LogoY.png'
+export {default as LightEditorLogo} from './L.LogoE.png'
+export {default as LightYoutuberLogo} from './L.LogoY.png'
+
 
 
 

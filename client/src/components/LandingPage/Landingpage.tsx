@@ -1,11 +1,11 @@
-import { useState } from "react"
-import Navbar from "./Navbar"
-import LandingPageBody from "./LandingPageBody"
-import Service from "./Services"
-import OurWork from "./OurWork"
-import LandingPageFooter from "./LandingPageFooter"
-import Login from "./Login"
-import Signup from "./SignUp"
+import { useState } from "react";
+import Navbar from "./Navbar";
+import LandingPageBody from "./LandingPageBody";
+import Service from "./Services";
+import OurWork from "./OurWork";
+import LandingPageFooter from "./LandingPageFooter";
+import Login from "./Login";
+import Signup from "./SignUp";
 
 const Landingpage = () => {
   const [showLogin, setShowLogin] = useState(false);
@@ -21,17 +21,15 @@ const Landingpage = () => {
 
   const openSignup = () => {
     setShowSignup(true);
-  }
+  };
 
   const closeSignup = () => {
-    setShowSignup(false)
-  }
-
-
+    setShowSignup(false);
+  };
 
   return (
     <>
-      <Navbar openLogin={openLogin} openSignup={openSignup}/>
+      <Navbar openLogin={openLogin} openSignup={openSignup} />
       <LandingPageBody />
       <Service />
       <OurWork />
@@ -39,7 +37,7 @@ const Landingpage = () => {
       {showLogin && <Login closeLogin={closeLogin} />}
       {ShowSignup && <Signup closeSignup={closeSignup} />}
     </>
-  )
-}
+  );
+};
 
-export default Landingpage
+export default Landingpage;

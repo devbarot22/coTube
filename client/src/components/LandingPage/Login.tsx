@@ -2,11 +2,14 @@ import { useEffect, useState } from "react";
 import * as Assets from "../assets/Assets";
 import axios from "axios";
 import { FiEyeOff, FiEye } from "react-icons/fi";
+import { useNavigate } from "react-router";
 
 const Login = ({ closeLogin }: { closeLogin: any }) => {
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const prevOverflow = document.body.style.overflow;
@@ -22,7 +25,8 @@ const Login = ({ closeLogin }: { closeLogin: any }) => {
     const identifier = formData?.get("identifier");
     const password = formData?.get("password");
 
-    const isEmail = /@gmail\.com$/.test(String(identifier));
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const isEmail = emailRegex.test(String(identifier));
     const data = isEmail
       ? { email: identifier, password }
       : { username: identifier, password };
@@ -30,12 +34,22 @@ const Login = ({ closeLogin }: { closeLogin: any }) => {
     try {
       const response = await axios.post(
         "http://localhost:3000/api/v1/user/login",
-        data
+        data,
+        { withCredentials: true }
       );
+
+      console.log(response.data);
+
+
+      const { accessToken } = response.data;
+
+      // Set the access token in the cookies
+      document.cookie = `AccessToken=${accessToken}; path=/`;
 
       if (response.status === 200) {
         console.log("Login successful!");
-        console.log("Server response:", response.data);
+        const isYoutuber = response.data.data.user.role === "youtuber";
+        navigate(isYoutuber ? "/Youtuber" : "/Editor");
       } else {
         console.log("Unexpected status code:", response.status);
       }
@@ -69,7 +83,8 @@ const Login = ({ closeLogin }: { closeLogin: any }) => {
             type="text"
             name="identifier"
             onChange={(e) => setIdentifier(e.target.value)}
-            className="border-b-2 border-gray-400 p-2 text-lg mb-4 w-full focus:border-black outline-none"
+            placeholder="enter your username or email"
+            className="border-b-2 border-gray-400 p-2 text-base mb-4 w-full focus:border-black outline-none"
           />
           <div className="relative">
             <label className="block mb-2">Password</label>
@@ -77,7 +92,8 @@ const Login = ({ closeLogin }: { closeLogin: any }) => {
               type={showstyle.type}
               name="password"
               onChange={(e) => setPassword(e.target.value)}
-              className="border-b-2 border-gray-400 focus:border-black p-2 mb-4 w-full outline-none"
+              placeholder="enter your password"
+              className="border-b-2 border-gray-400 text-base focus:border-black p-2 mb-1 w-full outline-none"
             />
             <div
               onClick={() => setShowPassword(!showPassword)}
@@ -85,11 +101,22 @@ const Login = ({ closeLogin }: { closeLogin: any }) => {
               {showPassword ? <FiEyeOff /> : <FiEye />}
             </div>
           </div>
+          <a
+            href="/forgot-password"
+            className="text-gray-500 mb-3 w-fit p-0 block">
+            Forgot Password?
+          </a>
           <button
             type="submit"
             className="bg-blue-500 w-full text-white p-2 mt-4 rounded">
             Login
           </button>
+          <p className="text-xs">
+            <span className="text-gray-700">
+              By clicking on login, I accept the{" "}
+            </span>
+            <a href="#">Terms & Conditions & Privacy Policy</a>
+          </p>
         </form>
       </div>
     </div>

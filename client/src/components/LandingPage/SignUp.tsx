@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import "./LandCss.css";
 import axios from "axios";
 import { FiEyeOff, FiEye } from "react-icons/fi";
+import { useNavigate } from "react-router";
 
 const Signup = ({ closeSignup }: { closeSignup: any }) => {
   const [isYoutuber, setIsYoutuber] = useState(true);
@@ -12,6 +13,8 @@ const Signup = ({ closeSignup }: { closeSignup: any }) => {
   const [passcordMatchingError, setPasscordMatchingError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const prevOverflow = document.body.style.overflow;
@@ -59,6 +62,7 @@ const Signup = ({ closeSignup }: { closeSignup: any }) => {
         if (response.status === 200) {
           console.log("Registration successful!");
           console.log("Server response:", response.data);
+          navigate(isYoutuber ? "/Youtuber" : "/Editor");
         } else {
           console.log("Unexpected status code:", response.status);
         }
@@ -104,13 +108,15 @@ const Signup = ({ closeSignup }: { closeSignup: any }) => {
           <input
             type="text"
             name="username"
-            className="border-b-2 border-gray-400 p-2 text-lg mb-4 w-full focus:border-black outline-none"
+            placeholder="Enter your username"
+            className="border-b-2 border-gray-400 p-2 text-base mb-4 w-full focus:border-black outline-none"
           />
           <label className="block mb-2">Email</label>
           <input
             type="email"
             name="email"
-            className="border-b-2 border-gray-400 p-2 text-lg mb-4 w-full focus:border-black outline-none"
+            placeholder="Enter your email"
+            className="border-b-2 border-gray-400 p-2 text-base mb-4 w-full focus:border-black outline-none"
           />
 
           <div className="relative">
@@ -119,7 +125,8 @@ const Signup = ({ closeSignup }: { closeSignup: any }) => {
               type={showstyle.type}
               name="password"
               onChange={(e) => setPassword(e.target.value)}
-              className="border-b-2  border-gray-400 focus:border-black p-2 mb-4 w-full outline-none"
+              placeholder="Enter your password"
+              className="border-b-2  border-gray-400 text-base focus:border-black p-2 mb-4 w-full outline-none"
             />
             <div
               onClick={() => setShowPassword(!showPassword)}
@@ -137,7 +144,8 @@ const Signup = ({ closeSignup }: { closeSignup: any }) => {
                 setPasscordMatchingError("");
               }
             }}
-            className="border-b-2 border-gray-400 focus:border-black p-2 mb-1 w-full outline-none"
+            placeholder="Confirm your password"
+            className="border-b-2 border-gray-400 text-base focus:border-black p-2 mb-2 w-full outline-none"
           />
 
           <div
@@ -145,7 +153,7 @@ const Signup = ({ closeSignup }: { closeSignup: any }) => {
               opacity: passcordMatchingError ? 1 : 0,
               minHeight: "20px",
               color: "red",
-              font: ""
+              font: "",
             }}>
             {passcordMatchingError}
           </div>
@@ -155,7 +163,12 @@ const Signup = ({ closeSignup }: { closeSignup: any }) => {
             Signup
           </button>
         </form>
-        <p className="text-xs"><span className="text-gray-700">By creating an account, I accept the </span><a href="#">Terms & Conditions & Privacy Policy</a></p>
+        <p className="text-xs">
+          <span className="text-gray-700">
+            By creating an account, I accept the{" "}
+          </span>
+          <a href="#">Terms & Conditions & Privacy Policy</a>
+        </p>
       </div>
     </div>
   );
