@@ -24,15 +24,13 @@ const createRoom = asyncHandler(async (req,res)=>{
     //store it in db
     //create a middleware that checks if room expires or not   
 
-    if(req.cookies?.RoomToken){                
-        throw new ApiError(400,"you have already created a room")
-    }
+
 
     const userId = req.user._id;    
 
     const {roomname,time} = req.body;
 
-    if(roomname.trim() === ""){
+    if(!roomname || roomname.trim() === ""){
         throw new ApiError(400,"please enter room name")
     }    
 
@@ -55,12 +53,12 @@ const createRoom = asyncHandler(async (req,res)=>{
     const options = {
         maxAge: (time || 5) * 60 * 1000,
         httpOnly: true,
-        secure: true
+        // secure: true
     }
 
     return res
     .status(200)
-    .cookie("RoomToken",roomToken,options)
+    .cookie("RoomToken",roomToken,options)  
     .json(
         new ApiResponse(200,room,"room created successfully")
     )
