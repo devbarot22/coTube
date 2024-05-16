@@ -1,0 +1,98 @@
+.box, .box1 {
+  position: relative;
+  width: 200px;
+  margin-left: 25%;
+  margin-bottom: 2%;
+  rotate: -45deg;
+  height: 3px;
+  background: white;
+}
+
+.box1{
+  rotate: 134deg !important;
+  margin-left: 40%;
+}
+
+.box::before, .box1::before {
+  content: "";
+  display: block;
+  position: absolute;
+  right: 0;
+  bottom: 0px;
+  width: 30px;
+  height: 30px;
+  border-bottom-left-radius: 100%;
+  border-left: 3px solid white;
+  border-bottom: 3px solid white;
+}
+
+.box::after, .box1::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0px;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  border-top-left-radius: 100%;
+  border-top: 3px solid white;
+  border-left: 3px solid white;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+/* SignUp Toggle */
+
+
+.toggle {
+  font-size: 2rem; 
+  border: 2px solid currentColor;
+  border-radius: 16px;
+  cursor: pointer;
+  display: block;
+  height: 3.9vh;
+  position: relative;
+  overflow: hidden;
+  width: 17%;
+}
+.toggle span {
+  background-color: currentColor;
+  border-radius: 2em;
+  display: block;
+  height: 3vh;
+  right: 0.1vw;
+  overflow: hidden;
+  margin-top: 2px;
+  position: absolute; 
+  /* top: 1; */
+  text-indent: -9999px; 
+  transition: right .25s;
+  width: 1.5vw;
+  z-index: 2;
+}
+
+/* .toggle::after {
+  box-shadow: .25em .25em #ffffff; 
+  height: 1.125em;
+  right: .9em;
+  top: .125em;
+  width: 1.125em;
+} */
+
+/* .toggle::before {
+  background-color: #ff0000; 
+  height: .625em;
+  outline: .25em dotted #ff0000; 
+  outline-offset: .125em;
+  left: .7em;
+  top: .7em;
+  width: .625em;
+} */
+
+input:checked ~ .toggle span {
+  right: 1.8vw;
+}
+
